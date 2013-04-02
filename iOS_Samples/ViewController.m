@@ -13,11 +13,12 @@
 @end
 
 @implementation ViewController
+@synthesize label;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    label.text = @"apple";
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,4 +27,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)click:(id)sender
+{
+    label.text = @"Banana";
+}
 @end
