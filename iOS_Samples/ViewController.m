@@ -39,7 +39,7 @@
 
 -(IBAction)clickMail
 {
-	NSString *url = [NSString stringWithString:@"mailto:piao_polar@163.com?cc=piao.polar@gmail.com&subject=My Issue&body=can use blank here"];
+	NSString *url = @"mailto:piao_polar@163.com?cc=piao.polar@gmail.com&subject=My Issue&body=can use blank here";
 	NSString *escaped = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:escaped]];
 }
