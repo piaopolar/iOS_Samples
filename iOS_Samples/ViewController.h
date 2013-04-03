@@ -11,4 +11,6 @@
 @interface ViewController : UIViewController
 @property (nonatomic, retain) IBOutlet UILabel *label;
 -(IBAction)click:(id)sender;
+-(IBAction)clickWebPage;
+-(IBAction)clickMail;
 @end

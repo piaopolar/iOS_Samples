@@ -31,4 +31,16 @@
 {
     label.text = @"Banana";
 }
+
+-(IBAction)clickWebPage
+{
+	[[UIApplication sharedApplication] openURL: [NSURL URLWithString:[NSString stringWithFormat:@"http://blog.csdn.net/piao_polar"]]];
+}
+
+-(IBAction)clickMail
+{
+	NSString *url = [NSString stringWithString:@"mailto:piao_polar@163.com?cc=piao.polar@gmail.com&subject=My Issue&body=can use blank here"];
+	NSString *escaped = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:escaped]];
+}
 @end
