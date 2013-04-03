@@ -24,6 +24,12 @@
 		6D103850170B126300B3F34D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D103828170B126200B3F34D /* Foundation.framework */; };
 		6D103858170B126300B3F34D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D103856170B126300B3F34D /* InfoPlist.strings */; };
 		6D10385B170B126300B3F34D /* iOS_SamplesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D10385A170B126300B3F34D /* iOS_SamplesTests.m */; };
+		6DD27A7D170C55450031951A /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD27A72170C55450031951A /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6DD27A7E170C55450031951A /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD27A74170C55450031951A /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6DD27A7F170C55450031951A /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD27A76170C55450031951A /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6DD27A80170C55450031951A /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD27A78170C55450031951A /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6DD27A81170C55450031951A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD27A7A170C55450031951A /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6DD27A82170C55450031951A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD27A7C170C55450031951A /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +66,19 @@
 		6D103857170B126300B3F34D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D103859170B126300B3F34D /* iOS_SamplesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOS_SamplesTests.h; sourceTree = "<group>"; };
 		6D10385A170B126300B3F34D /* iOS_SamplesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_SamplesTests.m; sourceTree = "<group>"; };
+		6DD27A70170C55450031951A /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		6DD27A71170C55450031951A /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		6DD27A72170C55450031951A /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		6DD27A73170C55450031951A /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		6DD27A74170C55450031951A /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		6DD27A75170C55450031951A /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		6DD27A76170C55450031951A /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		6DD27A77170C55450031951A /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		6DD27A78170C55450031951A /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		6DD27A79170C55450031951A /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		6DD27A7A170C55450031951A /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		6DD27A7B170C55450031951A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		6DD27A7C170C55450031951A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +108,7 @@
 		6D10381A170B126200B3F34D = {
 			isa = PBXGroup;
 			children = (
+				6DD27A6F170C55450031951A /* JSON */,
 				6D10382C170B126300B3F34D /* iOS_Samples */,
 				6D103853170B126300B3F34D /* iOS_SamplesTests */,
 				6D103825170B126200B3F34D /* Frameworks */,
@@ -161,6 +181,26 @@
 				6D103856170B126300B3F34D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6DD27A6F170C55450031951A /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				6DD27A70170C55450031951A /* JSON.h */,
+				6DD27A71170C55450031951A /* NSObject+SBJSON.h */,
+				6DD27A72170C55450031951A /* NSObject+SBJSON.m */,
+				6DD27A73170C55450031951A /* NSString+SBJSON.h */,
+				6DD27A74170C55450031951A /* NSString+SBJSON.m */,
+				6DD27A75170C55450031951A /* SBJSON.h */,
+				6DD27A76170C55450031951A /* SBJSON.m */,
+				6DD27A77170C55450031951A /* SBJsonBase.h */,
+				6DD27A78170C55450031951A /* SBJsonBase.m */,
+				6DD27A79170C55450031951A /* SBJsonParser.h */,
+				6DD27A7A170C55450031951A /* SBJsonParser.m */,
+				6DD27A7B170C55450031951A /* SBJsonWriter.h */,
+				6DD27A7C170C55450031951A /* SBJsonWriter.m */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +317,12 @@
 				6D103833170B126300B3F34D /* main.m in Sources */,
 				6D103837170B126300B3F34D /* AppDelegate.m in Sources */,
 				6D103840170B126300B3F34D /* ViewController.m in Sources */,
+				6DD27A7D170C55450031951A /* NSObject+SBJSON.m in Sources */,
+				6DD27A7E170C55450031951A /* NSString+SBJSON.m in Sources */,
+				6DD27A7F170C55450031951A /* SBJSON.m in Sources */,
+				6DD27A80170C55450031951A /* SBJsonBase.m in Sources */,
+				6DD27A81170C55450031951A /* SBJsonParser.m in Sources */,
+				6DD27A82170C55450031951A /* SBJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +513,7 @@
 				6D103860170B126300B3F34D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D103861170B126300B3F34D /* Build configuration list for PBXNativeTarget "iOS_SamplesTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +522,7 @@
 				6D103863170B126300B3F34D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,10 +7,55 @@
 //
 
 #import "AppDelegate.h"
+#import "NSString+SBJSON.h"
 
 #import "ViewController.h"
 
 @implementation AppDelegate
+
+static NSString* trackViewURL;
+
+-(void)onCheckVersion
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+		NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+		NSString *currentVersion = [infoDic objectForKey:@"CFBundleVersion"];
+
+		NSString *url = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@", [infoDic objectForKey:@"appid" ]];
+		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        [request setURL:[NSURL URLWithString:url]];
+        [request setHTTPMethod:@"POST"];
+
+        NSHTTPURLResponse *urlResponse = nil;
+        NSError *error = nil;
+        NSData *recervedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+        
+        NSString *results = [[NSString alloc] initWithBytes:[recervedData bytes] length:[recervedData length] encoding:NSUTF8StringEncoding];
+        NSDictionary *dic = [results JSONValue];
+        NSArray *infoArray = [dic objectForKey:@"results"];
+		
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([infoArray count]) {
+                NSDictionary *releaseInfo = [infoArray objectAtIndex:0];
+                NSString *lastVersion = [releaseInfo objectForKey:@"version"];
+                
+                if (![lastVersion isEqualToString:currentVersion]) {
+                    trackViewURL = [[NSString alloc] initWithString: [releaseInfo objectForKey:@"trackViewUrl"]];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update Notice" message:@"there is a new version, go to update?" delegate:self cancelButtonTitle:@"close" otherButtonTitles:@"update", nil];
+					[alert show];
+                }
+            }
+        });
+    });
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1 && trackViewURL) {
+        [[UIApplication sharedApplication] openURL: [NSURL URLWithString:trackViewURL]];
+		trackViewURL = nil;
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -23,6 +68,8 @@
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+	
+	[self onCheckVersion];
     return YES;
 }
 
