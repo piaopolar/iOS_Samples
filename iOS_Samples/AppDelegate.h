@@ -16,6 +16,4 @@
 
 @property (strong, nonatomic) ViewController *viewController;
 
--(void)CheckVersion;
-
 @end
