@@ -57,6 +57,26 @@ static NSString* trackViewURL;
     }
 }
 
+- (void)application:(UIApplication *)application
+didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"MyAlertView"
+														message:@"Local notification was received, app is in the foreground"
+													   delegate:self cancelButtonTitle:@"OK"
+											  otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void) AddLocalNotifications
+{	
+	UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+	if (localNotif == nil) return;
+	NSDate *fireTime = [[NSDate date] addTimeInterval:10]; // adds 10 secs
+	localNotif.fireDate = fireTime;
+	localNotif.alertBody = @"Local notification was received, app is in the background!";
+	[[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -70,6 +90,8 @@ static NSString* trackViewURL;
     [self.window makeKeyAndVisible];
 	
 	[self onCheckVersion];
+	[self AddLocalNotifications];
+
     return YES;
 }
 
