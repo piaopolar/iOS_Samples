@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D098C7A171BA88C00515439 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D098C77171BA88C00515439 /* Changelog.txt */; };
+		6D098C7B171BA88C00515439 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D098C77171BA88C00515439 /* Changelog.txt */; };
+		6D098C7C171BA88C00515439 /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D098C79171BA88C00515439 /* libGoogleConversionTracking.a */; };
+		6D098C7D171BA88C00515439 /* libGoogleConversionTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D098C79171BA88C00515439 /* libGoogleConversionTracking.a */; };
+		6D098C7F171BAA8A00515439 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D098C7E171BAA8A00515439 /* AdSupport.framework */; };
 		6D103827170B126200B3F34D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D103826170B126200B3F34D /* UIKit.framework */; };
 		6D103829170B126300B3F34D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D103828170B126200B3F34D /* Foundation.framework */; };
 		6D10382B170B126300B3F34D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D10382A170B126300B3F34D /* CoreGraphics.framework */; };
@@ -43,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D098C77171BA88C00515439 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog.txt; sourceTree = "<group>"; };
+		6D098C78171BA88C00515439 /* GoogleConversionPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleConversionPing.h; sourceTree = "<group>"; };
+		6D098C79171BA88C00515439 /* libGoogleConversionTracking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleConversionTracking.a; sourceTree = "<group>"; };
+		6D098C7E171BAA8A00515439 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6D103823170B126200B3F34D /* iOS_Samples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Samples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D103826170B126200B3F34D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D103828170B126200B3F34D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,9 +95,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D098C7F171BAA8A00515439 /* AdSupport.framework in Frameworks */,
 				6D103827170B126200B3F34D /* UIKit.framework in Frameworks */,
 				6D103829170B126300B3F34D /* Foundation.framework in Frameworks */,
 				6D10382B170B126300B3F34D /* CoreGraphics.framework in Frameworks */,
+				6D098C7C171BA88C00515439 /* libGoogleConversionTracking.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,15 +110,28 @@
 				6D10384E170B126300B3F34D /* SenTestingKit.framework in Frameworks */,
 				6D10384F170B126300B3F34D /* UIKit.framework in Frameworks */,
 				6D103850170B126300B3F34D /* Foundation.framework in Frameworks */,
+				6D098C7D171BA88C00515439 /* libGoogleConversionTracking.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D098C76171BA88B00515439 /* GoogleConversionTrackingSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6D098C77171BA88C00515439 /* Changelog.txt */,
+				6D098C78171BA88C00515439 /* GoogleConversionPing.h */,
+				6D098C79171BA88C00515439 /* libGoogleConversionTracking.a */,
+			);
+			path = GoogleConversionTrackingSDK;
+			sourceTree = "<group>";
+		};
 		6D10381A170B126200B3F34D = {
 			isa = PBXGroup;
 			children = (
+				6D098C7E171BAA8A00515439 /* AdSupport.framework */,
+				6D098C76171BA88B00515439 /* GoogleConversionTrackingSDK */,
 				6DD27A6F170C55450031951A /* JSON */,
 				6D10382C170B126300B3F34D /* iOS_Samples */,
 				6D103853170B126300B3F34D /* iOS_SamplesTests */,
@@ -280,6 +304,7 @@
 				6D10383D170B126300B3F34D /* Default-568h@2x.png in Resources */,
 				6D103843170B126300B3F34D /* ViewController_iPhone.xib in Resources */,
 				6D103846170B126300B3F34D /* ViewController_iPad.xib in Resources */,
+				6D098C7A171BA88C00515439 /* Changelog.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D103858170B126300B3F34D /* InfoPlist.strings in Resources */,
+				6D098C7B171BA88C00515439 /* Changelog.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +470,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS_Samples/iOS_Samples-Prefix.pch";
 				INFOPLIST_FILE = "iOS_Samples/iOS_Samples-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleConversionTrackingSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -455,6 +485,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS_Samples/iOS_Samples-Prefix.pch";
 				INFOPLIST_FILE = "iOS_Samples/iOS_Samples-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleConversionTrackingSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -471,6 +505,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS_Samples/iOS_Samples-Prefix.pch";
 				INFOPLIST_FILE = "iOS_SamplesTests/iOS_SamplesTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleConversionTrackingSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -488,6 +526,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS_Samples/iOS_Samples-Prefix.pch";
 				INFOPLIST_FILE = "iOS_SamplesTests/iOS_SamplesTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/GoogleConversionTrackingSDK\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

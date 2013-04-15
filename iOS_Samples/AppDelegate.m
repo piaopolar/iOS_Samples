@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "GoogleConversionPing.h"
 #import "NSString+SBJSON.h"
 
 #import "ViewController.h"
@@ -91,6 +92,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 	
 	[self onCheckVersion];
 	[self AddLocalNotifications];
+	[GoogleConversionPing pingWithConversionId:@"0123456789" label:@"abCDEFG12hIJk3Lm4nO" value:@"0.99" isRepeatable:NO];
 
     return YES;
 }
