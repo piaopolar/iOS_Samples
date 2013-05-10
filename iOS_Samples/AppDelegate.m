@@ -7,9 +7,22 @@
 //
 
 #import "AppDelegate.h"
+#import "GoogleConversionPing.h"
 #import "NSString+SBJSON.h"
 
 #import "ViewController.h"
+
+@implementation LandscapeMPMoviePlayerViewController
+-(BOOL) shouldAutorotate
+{
+	return YES;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskLandscape;
+}
+@end
 
 @implementation AppDelegate
 
@@ -57,19 +70,51 @@ static NSString* trackViewURL;
     }
 }
 
+- (void)application:(UIApplication *)application
+didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"MyAlertView"
+														message:@"Local notification was received, app is in the foreground"
+													   delegate:self cancelButtonTitle:@"OK"
+											  otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void) AddLocalNotifications
+{	
+	UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+	if (localNotif == nil) return;
+	NSDate *fireTime = [[NSDate date] addTimeInterval:10]; // adds 10 secs
+	localNotif.fireDate = fireTime;
+	localNotif.alertBody = @"Local notification was received, app is in the background!";
+	[[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
-    } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
-    }
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
-	[self onCheckVersion];
+	NSString * resourcePath = [[NSBundle mainBundle] resourcePath];	
+	NSString * videoPath = [resourcePath stringByAppendingPathComponent:@"Launch.m4v"];
+	NSURL* videoURL = [NSURL fileURLWithPath:videoPath];
+	moviePlayerController = [[LandscapeMPMoviePlayerViewController alloc] initWithContentURL:videoURL];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackComplete:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+
+
+	moviePlayerController.moviePlayer.view.frame = self.viewController.view.bounds;
+	[moviePlayerController.view setTransform:CGAffineTransformMakeRotation(2 * M_PI - M_PI / 2)];
+	
+	moviePlayerController.moviePlayer.controlStyle = MPMovieControlStyleNone;
+//  [moviePlayerController.moviePlayer.backgroundView addSubview:[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SplashCopy.png"]]]];
+	moviePlayerController.moviePlayer.scalingMode = MPMovieScalingModeFill;
+//	[moviePlayerController.moviePlayer setFullscreen:YES animated:NO];
+	
+	self.window.rootViewController = moviePlayerController;
+	[self.window makeKeyAndVisible];
+
+	[moviePlayerController.moviePlayer play];
+//  [self.window.rootViewController.view addSubview:moviePlayerController.moviePlayer.view];
+
     return YES;
 }
 
@@ -101,3 +146,29 @@ static NSString* trackViewURL;
 }
 
 @end
+
+
+@implementation AppDelegate(MovieControllerInternal)
+- (void)moviePlaybackComplete:(NSNotification *)notification
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:MPMoviePlayerPlaybackDidFinishNotification
+												  object:nil];
+//	[moviePlayerController.view removeFromSuperview];
+
+	// Override point for customization after application launch.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
+    } else {
+        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
+    }
+
+    self.window.rootViewController = self.viewController;
+	[[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceOrientationDidChangeNotification object: nil];
+
+	[self onCheckVersion];
+	[self AddLocalNotifications];
+	[GoogleConversionPing pingWithConversionId:@"0123456789" label:@"abCDEFG12hIJk3Lm4nO" value:@"0.99" isRepeatable:NO];
+}
+@end
+
