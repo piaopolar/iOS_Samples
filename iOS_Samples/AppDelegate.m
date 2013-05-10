@@ -12,6 +12,18 @@
 
 #import "ViewController.h"
 
+@implementation LandscapeMPMoviePlayerViewController
+-(BOOL) shouldAutorotate
+{
+	return YES;
+}
+
+-(NSUInteger)supportedInterfaceOrientations
+{
+	return UIInterfaceOrientationMaskLandscape;
+}
+@end
+
 @implementation AppDelegate
 
 static NSString* trackViewURL;
@@ -80,19 +92,28 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
-    } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
-    }
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
-	[self onCheckVersion];
-	[self AddLocalNotifications];
-	[GoogleConversionPing pingWithConversionId:@"0123456789" label:@"abCDEFG12hIJk3Lm4nO" value:@"0.99" isRepeatable:NO];
+	NSString * resourcePath = [[NSBundle mainBundle] resourcePath];	
+	NSString * videoPath = [resourcePath stringByAppendingPathComponent:@"Launch.m4v"];
+	NSURL* videoURL = [NSURL fileURLWithPath:videoPath];
+	moviePlayerController = [[LandscapeMPMoviePlayerViewController alloc] initWithContentURL:videoURL];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackComplete:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+
+
+	moviePlayerController.moviePlayer.view.frame = self.viewController.view.bounds;
+	[moviePlayerController.view setTransform:CGAffineTransformMakeRotation(2 * M_PI - M_PI / 2)];
+	
+	moviePlayerController.moviePlayer.controlStyle = MPMovieControlStyleNone;
+//  [moviePlayerController.moviePlayer.backgroundView addSubview:[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SplashCopy.png"]]]];
+	moviePlayerController.moviePlayer.scalingMode = MPMovieScalingModeFill;
+//	[moviePlayerController.moviePlayer setFullscreen:YES animated:NO];
+	
+	self.window.rootViewController = moviePlayerController;
+	[self.window makeKeyAndVisible];
+
+	[moviePlayerController.moviePlayer play];
+//  [self.window.rootViewController.view addSubview:moviePlayerController.moviePlayer.view];
 
     return YES;
 }
@@ -125,3 +146,29 @@ didReceiveLocalNotification:(UILocalNotification *)notification
 }
 
 @end
+
+
+@implementation AppDelegate(MovieControllerInternal)
+- (void)moviePlaybackComplete:(NSNotification *)notification
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:MPMoviePlayerPlaybackDidFinishNotification
+												  object:nil];
+//	[moviePlayerController.view removeFromSuperview];
+
+	// Override point for customization after application launch.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
+    } else {
+        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
+    }
+
+    self.window.rootViewController = self.viewController;
+	[[NSNotificationCenter defaultCenter] postNotificationName:UIDeviceOrientationDidChangeNotification object: nil];
+
+	[self onCheckVersion];
+	[self AddLocalNotifications];
+	[GoogleConversionPing pingWithConversionId:@"0123456789" label:@"abCDEFG12hIJk3Lm4nO" value:@"0.99" isRepeatable:NO];
+}
+@end
+
